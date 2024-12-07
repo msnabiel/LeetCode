@@ -1,0 +1,2 @@
+# Dummy file for Sliding_Window topic
+# Add your code solutions for Sliding_Window here.

@@ -1,0 +1,2 @@
+# Dummy file for Strings topic
+# Add your code solutions for Strings here.

@@ -1,0 +1,2 @@
+# Dummy file for Easy level
+# Add your Easy level code solutions here.

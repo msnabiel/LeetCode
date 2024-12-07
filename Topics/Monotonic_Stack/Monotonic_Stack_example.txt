@@ -1,0 +1,2 @@
+# Dummy file for Monotonic_Stack topic
+# Add your code solutions for Monotonic_Stack here.

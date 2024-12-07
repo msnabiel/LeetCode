@@ -1,0 +1,2 @@
+# Dummy file for Trie topic
+# Add your code solutions for Trie here.

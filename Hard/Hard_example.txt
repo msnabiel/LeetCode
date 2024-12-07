@@ -1,0 +1,2 @@
+# Dummy file for Hard level
+# Add your Hard level code solutions here.

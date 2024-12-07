@@ -1,0 +1,2 @@
+# Dummy file for Binary_Search topic
+# Add your code solutions for Binary_Search here.

@@ -1,0 +1,2 @@
+# Dummy file for Divide_and_Conquer topic
+# Add your code solutions for Divide_and_Conquer here.

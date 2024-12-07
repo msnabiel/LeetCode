@@ -1,0 +1,2 @@
+# Dummy file for Hash_Table topic
+# Add your code solutions for Hash_Table here.

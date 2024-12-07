@@ -1,0 +1,2 @@
+# Dummy file for Math topic
+# Add your code solutions for Math here.

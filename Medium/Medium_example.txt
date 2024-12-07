@@ -1,0 +1,2 @@
+# Dummy file for Medium level
+# Add your Medium level code solutions here.
