@@ -26,8 +26,10 @@ LeetCode/
 ## 🚀 Getting Started
 
 ### Clone the Repository:
+```
 git clone https://github.com/msnabiel/LeetCode.git
 cd LeetCode
+```
 
 ### Explore Solutions:
 * Navigate to the `Problems/` folder and locate the solution for any problem using its LeetCode number and name.
