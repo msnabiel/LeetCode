@@ -5,7 +5,7 @@ Welcome to my LeetCode Solutions Repository! This repository is a collection of 
 ## 📂 Repository Structure
 
 The repository is organized as follows:
-
+```
 LeetCode/
 ├── Problems/
 │   ├── 0001_Two_Sum/
@@ -16,6 +16,7 @@ LeetCode/
 │   │   ├── README.md
 │   ├── ...
 └── README.md
+```
 
 ### Folders Overview:
 * **Problems/**: Each LeetCode problem is organized into its own folder with a name in the format `<problem-number>_<problem-name>`. Each folder contains:
