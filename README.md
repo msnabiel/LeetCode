@@ -39,7 +39,7 @@ python Problems/0001_Two_Sum/solution.py
 ## 🌟 Features
 
 * **Organized by Problem**: Each problem is self-contained in its own folder.
-* **Detailed Documentation**: Each solution includes a README with problem descriptions and solution strategies.
+* **Detailed Documentation**: Each solution includes a README with problem descriptions.
 * **Continuously Updated**: Regularly updated with new problems and approaches.
 
 ## ✨ Topics Covered
