@@ -1,38 +1,39 @@
 class Solution {
-public:
-    int n;
-    vector<int> degreein;
-    vector< vector<int> > rGraph;
-    vector<int> ans;
-    
-    void init(vector<vector<int>>& G){
-        n = G.size();
-        degreein = vector<int>(n,0);
-        rGraph.resize(n, vector<int>(0) );
-        
-        for (int u=0; u<n; u++){
-            for (int v:G[u]){
-                rGraph[v].push_back(u);
-                degreein[u]++;
+private:
+    bool safe(int node, vector<vector<int>>& graph, vector<int>& vis, vector<int>& isterminal) {
+        if (vis[node] != 0) { 
+            return isterminal[node] == 1;
+        }
+
+        vis[node] = -1; 
+        for (auto it : graph[node]) {
+            if (!safe(it, graph, vis, isterminal)) {
+                return false; 
             }
         }
+
+        vis[node] = 1;       
+        isterminal[node] = 1;
+        return true;
     }
-    
+
+public:
     vector<int> eventualSafeNodes(vector<vector<int>>& graph) {
-        init(graph);
-        queue<int> que;
-        for (int i=0; i<n; i++){
-            if (degreein[i]==0) que.push(i);
-        }
-        while (que.size()){
-            int u = que.front(); que.pop();
-            ans.push_back(u);
-            for (int v:rGraph[u]){
-                degreein[v]--;
-                if (degreein[v]==0) que.push(v);
+        int v = graph.size();
+        vector<int> vis(v, 0);          
+        vector<int> isterminal(v, 0);  
+        for (int i = 0; i < v; i++) {
+            if (!vis[i]) {
+                safe(i, graph, vis, isterminal);
             }
         }
-        sort(ans.begin(),ans.end());
+        vector<int> ans;
+        for (int i = 0; i < v; i++) {
+            if (isterminal[i] == 1) {
+                ans.push_back(i);
+            }
+        }
+
         return ans;
     }
 };
