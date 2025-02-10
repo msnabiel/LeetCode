@@ -1,26 +1,32 @@
 class Solution {
 public:
     string clearDigits(string s) {
-        stack<char> stk;
-        for(char i : s){
-            if(!isdigit(i)){
-                stk.push(i);
+        int digit_ptr = 0;
+        int char_ptr = 0;
+        int n = s.size();
+
+        while(digit_ptr < n){
+            while(digit_ptr < n && !isdigit(s[digit_ptr])){
+                digit_ptr++;
             }
-            else{
-                if(!stk.empty() && (stk.top() >= 'a' && stk.top() <= 'z')){
-                    stk.pop();
-                }
-                else if(!stk.empty() || (stk.top() <= 'a' && stk.top() >= 'z')){
-                    stk.push(i);
-                }
+            if(digit_ptr == n){
+                break;
+            }
+            char_ptr = digit_ptr;
+            while(char_ptr >= 0 && (s[char_ptr] < 'a' || s[char_ptr] > 'z')){
+                char_ptr--;
+            }
+            s[digit_ptr] = '*';
+            s[char_ptr] = '*';
+            digit_ptr++;
+
+        }
+        string ans = "";
+        for(auto it : s){
+            if(it != '*'){
+                ans += it;
             }
         }
-        string rev = "";
-        while(!stk.empty()){
-            rev+=stk.top();
-            stk.pop();
-        }
-        reverse(rev.begin(),rev.end());
-        return rev;
+        return ans;
     }
 };
