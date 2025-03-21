@@ -8,35 +8,26 @@ class Solution(object):
         :type supplies: List[str]
         :rtype: List[str]
         """
-        graph = defaultdict(list)  # Adjacency list for recipe dependencies
-        in_degree = {}  # To track remaining unmet ingredients for each recipe
-        supply_set = set(supplies)  # Convert to set for O(1) lookups
-        queue = deque()  # BFS queue
-        result = []  # Store final recipes
-        
-        # Build graph and in-degree count
-        for recipe, ing_list in zip(recipes, ingredients):
-            in_degree[recipe] = len(ing_list)  # Count dependencies
-            for ing in ing_list:
-                graph[ing].append(recipe)  # Ingredient → Recipe dependency
-            
-            # If all ingredients are in supplies, add to queue
-            if in_degree[recipe] == 0:
-                queue.append(recipe)
+        adj = defaultdict(list)
+        in_degree = {recipe: 0 for recipe in recipes}
 
-        # Process available supplies
-        for sup in supplies:
-            queue.append(sup)  # Enqueue all initial supplies
+        # Step 1: Build the graph and calculate in-degrees
+        for i, recipe in enumerate(recipes):
+            for ingredient in ingredients[i]:
+                adj[ingredient].append(recipe)
+            in_degree[recipe] = len(ingredients[i])
 
-        # Topological Sorting (BFS)
+        # Step 2: Initialize the queue with initial supplies
+        result = []
+        queue = deque(supplies)
+
+        # Step 3: BFS to find all possible recipes
         while queue:
-            item = queue.popleft()
-            if item in in_degree:  # Only recipes should be in the final result
-                result.append(item)
-            
-            for neighbor in graph[item]:
-                in_degree[neighbor] -= 1  # Reduce dependency count
-                if in_degree[neighbor] == 0:
-                    queue.append(neighbor)  # Recipe is now possible
+            curr = queue.popleft()
+            for recipe in adj[curr]:
+                in_degree[recipe] -= 1
+                if in_degree[recipe] == 0:
+                    result.append(recipe)
+                    queue.append(recipe)
 
         return result
