@@ -1,6 +1,7 @@
 class Solution {
 public:
     long long putMarbles(vector<int>& weights, int k) {
+        if (k==1) return 0;
         int n = weights.size();
         
         vector<int> pairSum(n-1, 0);
