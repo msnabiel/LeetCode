@@ -1,19 +1,16 @@
 class Solution(object):
     def findCircleNum(self, isConnected):
-        n = len(isConnected)
-        visited = [False] * n
-        count = 0
-
         def dfs(city):
-            for neighbor in range(n):
-                if isConnected[city][neighbor] == 1 and not visited[neighbor]:
-                    visited[neighbor] = True
-                    dfs(neighbor)
-
-        for city in range(n):
-            if not visited[city]:
-                visited[city] = True
-                dfs(city)
-                count += 1
-
-        return count
+            visited[city] = True
+            for i in range(n):
+                if(isConnected[city][i]==1 and visited[i]== False):
+                    dfs(i)
+        n = len(isConnected)
+        provinces = 0
+        visited = [False] * n
+        for j in range(n):
+            if not visited[j]:
+                #visited[i] = True
+                dfs(j)
+                provinces += 1
+        return provinces
