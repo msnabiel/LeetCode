@@ -1,44 +1,30 @@
-from typing import List
-from collections import defaultdict
+class Solution(object):
+    def largestPathValue(self, colors, edges):
+        adj = defaultdict(list)
+        for src, dst in edges:
+            adj[src].append(dst)
+        
+        def dfs(node):
+            if node in path:
+                return float("inf")
+            if node in visit:
+                return 0
+            visit.add(node)
+            path.add(node)
+            colorIndex = ord(colors[node]) - ord('a') 
+            count[node][colorIndex] = 1
 
-class Solution:
-    def largestPathValue(self, colors: str, edges: List[List[int]]) -> int:
-        n = len(colors)
-        graph = defaultdict(list)
-        for u, v in edges:
-            graph[u].append(v)
-
-        dp = [[0] * 26 for _ in range(n)]  # dp[node][c]: max count of color c at this node
-        visited = [0] * n  # 0 = unvisited, 1 = visiting, 2 = visited
-        self.has_cycle = False
-        result = 0
-
-        def dfs(node: int) -> List[int]:
-            if visited[node] == 1:
-                self.has_cycle = True
-                return [0] * 26
-            if visited[node] == 2:
-                return dp[node]
-
-            visited[node] = 1
-            color_index = ord(colors[node]) - ord('a')
-            count = [0] * 26
-
-            for neighbor in graph[node]:
-                neighbor_count = dfs(neighbor)
-                if self.has_cycle:
-                    return [0] * 26
+            for nei in adj[node]:
+                if dfs(nei) == float('inf'):
+                    return float('inf')
                 for c in range(26):
-                    count[c] = max(count[c], neighbor_count[c])
-
-            count[color_index] += 1
-            dp[node] = count
-            visited[node] = 2
-            return count
-
+                    count[node][c] = max(count[node][c],(1 if c == colorIndex else 0) + count[nei][c])
+            path.remove(node)
+            return max(count[node])
+        n , res = len(colors),0
+        visit, path = set(), set()
+        count = [[0]*26 for i in range(n)]
         for i in range(n):
-            if visited[i] == 0:
-                counts = dfs(i)
-                result = max(result, max(counts))
-
-        return -1 if self.has_cycle else result
+            res = max(dfs(i),res)
+        return -1 if res == float('inf') else res
+        
