@@ -1,4 +1,4 @@
-from collections import defaultdict, deque
+from collections import defaultdict
 
 class Solution(object):
     def isBipartite(self, graph):
@@ -9,26 +9,26 @@ class Solution(object):
         n = len(graph)
         adj = defaultdict(list)
         
-        # Build adjacency list from graph
+        # Build adjacency list
         for src in range(n):
             for dst in graph[src]:
                 adj[src].append(dst)
         
-        color = {}  # node -> 0 or 1
+        color = {}
 
-        # For each node (handle disconnected components)
+        def dfs(node, c):
+            color[node] = c
+            for neighbor in adj[node]:
+                if neighbor not in color:
+                    if not dfs(neighbor, 1 - c):
+                        return False
+                elif color[neighbor] == color[node]:
+                    return False
+            return True
+
         for node in range(n):
             if node not in color:
-                # BFS from this node
-                queue = deque([node])
-                color[node] = 0
+                if not dfs(node, 0):
+                    return False
 
-                while queue:
-                    current = queue.popleft()
-                    for neighbor in adj[current]:
-                        if neighbor not in color:
-                            color[neighbor] = 1 - color[current]
-                            queue.append(neighbor)
-                        elif color[neighbor] == color[current]:
-                            return False
         return True
