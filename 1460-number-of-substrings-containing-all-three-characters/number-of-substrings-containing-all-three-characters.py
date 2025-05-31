@@ -4,16 +4,20 @@ class Solution(object):
         :type s: str
         :rtype: int
         """
-        count = 0
+        from collections import defaultdict
+
+        count = defaultdict(int)
+        res = 0
         left = 0
-        char_count = {'a': 0, 'b': 0, 'c': 0}
-        
+
         for right in range(len(s)):
-            char_count[s[right]] += 1
-            
-            while char_count['a'] > 0 and char_count['b'] > 0 and char_count['c'] > 0:
-                count += len(s) - right
-                char_count[s[left]] -= 1
+            count[s[right]] += 1
+
+            # While we have at least one of each 'a', 'b', and 'c'
+            while count['a'] > 0 and count['b'] > 0 and count['c'] > 0:
+                res += len(s) - right  # All substrings from current right to end are valid
+                count[s[left]] -= 1
                 left += 1
-        
-        return count
+
+        return res
+
