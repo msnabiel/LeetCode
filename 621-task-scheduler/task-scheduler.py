@@ -1,12 +1,4 @@
-class Solution(object):
-    def leastInterval(self, tasks, n):
-        """
-        :type tasks: List[str]
-        :type n: int
-        :rtype: int
-        """
-        import collections
-
+from collections import Counter 
 class Solution(object):
     def leastInterval(self, tasks, n):
         """
@@ -15,7 +7,7 @@ class Solution(object):
         :rtype: int
         """
         # Step 1: Count frequencies
-        freq = collections.Counter(tasks)
+        freq = Counter(tasks)
         max_freq = max(freq.values())
         
         # Step 2: Count how many tasks have max frequency
